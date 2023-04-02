@@ -2,13 +2,19 @@
   <div class="weather-card">
     <div class="close-button" @click="$emit('deleteLocation')">delete</div>
 
-    <div class="weather-card-section" v-if="weatherData">
+    <div
+      class="weather-card-section"
+      v-if="weatherData"
+      data-test="weather-section-success"
+    >
       <div class="weather-card-section-item">
         <p class="weather-p">Now</p>
       </div>
       <div class="weather-card-section-item weather-actual">
         <div>
-          <p class="weather-p">{{ weatherData.temp_c }} °C</p>
+          <p class="weather-p" data-test="weather-celsius">
+            {{ weatherData.temp_c }} °C
+          </p>
         </div>
         <div>
           <img
@@ -19,20 +25,36 @@
         </div>
       </div>
       <div class="weather-card-section-item">
-        <p class="weather-p">{{ weatherData.condition.text }}</p>
+        <p class="weather-p" data-test="weather-condition">
+          {{ weatherData.condition.text }}
+        </p>
       </div>
     </div>
-    <div class="weather-card-section" v-else-if="locationFetchError">
+    <div
+      class="weather-card-section"
+      v-else-if="locationFetchError"
+      data-test="weather-section-error"
+    >
       Error fetching weather data
     </div>
-    <div class="weather-card-section" v-else>Loading...</div>
+    <div
+      class="weather-card-section"
+      data-test="weather-section-loading"
+      v-else
+    >
+      Loading...
+    </div>
 
-    <div class="weather-card-section weather-location" v-if="locationData">
+    <div
+      class="weather-card-section weather-location"
+      v-if="locationData"
+      data-test="location-section-success"
+    >
       <div class="weather-card-section-item">
         <p class="weather-p">{{ localTime }}</p>
       </div>
       <div class="weather-card-section-item">
-        <p class="weather-p">
+        <p class="weather-p" data-test="weather-location">
           {{ locationData.name }}, {{ locationData.region }}
         </p>
       </div>
@@ -40,7 +62,13 @@
     <div class="weather-card-section" v-else-if="locationFetchError">
       <p>{{ locationFetchError }}</p>
     </div>
-    <div class="weather-card-section" v-else>Loading...</div>
+    <div
+      class="weather-card-section"
+      data-test="location-section-loading"
+      v-else
+    >
+      Loading...
+    </div>
   </div>
 </template>
 
@@ -74,20 +102,22 @@ const localTime = computed(() => {
 });
 
 watchEffect(async () => {
+  locationFetchError.value = false;
+  locationData.value = null;
+  weatherData.value = null;
+
   try {
-    locationFetchError.value = false;
     const res = await fetch(
       `${BASE_URL}/current.json?q=${location.value}&key=${KEY}`
     );
     const data = await res.json();
 
     if (data.error) {
-      locationFetchError.value = data.error.message;
-      return;
+      locationFetchError.value = data.error.message || "Error";
+    } else {
+      locationData.value = data.location;
+      weatherData.value = data.current;
     }
-
-    locationData.value = data.location;
-    weatherData.value = data.current;
   } catch (error) {
     locationFetchError.value = error.message;
   }
