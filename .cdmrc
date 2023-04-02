@@ -1,0 +1,4 @@
+terminals: ["npm install && npm run dev"]
+tabs: ["src/main.js", "src/App.vue"]
+playground-view: "terminal-editor-browser"
+live-reload-browser: false
