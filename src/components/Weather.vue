@@ -68,7 +68,7 @@ const BASE_URL = "http://api.weatherapi.com/v1";
 const KEY = "API_KEY_HERE";
 
 const localTime = computed(() => {
-  return locationData.value.localtime
+  return locationData.value?.localtime
     ? new Date(locationData.value.localtime).toLocaleString()
     : null;
 });
