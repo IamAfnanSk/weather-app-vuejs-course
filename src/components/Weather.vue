@@ -46,6 +46,7 @@
 
 <script setup>
 import { toRefs, watchEffect, ref, computed } from "vue";
+import fetch from "cross-fetch";
 
 const props = defineProps({
   location: {
