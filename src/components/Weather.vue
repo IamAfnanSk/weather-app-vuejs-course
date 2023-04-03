@@ -96,8 +96,6 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(["deleteLocation"]);
-
 const { location } = toRefs(props);
 
 const locationData = ref(null);
@@ -106,7 +104,7 @@ const weatherData = ref(null);
 const locationFetchError = ref(false);
 
 const BASE_URL = "https://api.weatherapi.com/v1";
-const KEY = "655f56083b544971b0d213400232903";
+const KEY = "YOUR_API_KEY_HERE";
 
 const localTime = computed(() => {
   return locationData.value?.localtime

@@ -1,10 +1,6 @@
 <template>
   <div class="weather-card-container">
-    <Weather
-      :key="idx"
-      @deleteLocation="() => deleteLocation(idx)"
-      :location="'Mumbai'"
-    />
+    <Weather :location="'Mumbai'" />
   </div>
 </template>
 
