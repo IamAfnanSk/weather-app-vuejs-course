@@ -1,5 +1,7 @@
 <template>
   <div class="weather-card">
+    <div class="close-button" @click="$emit('deleteLocation')">delete</div>
+
     <!-- Show below div if weatherData exist -->
     <div
       v-if="weatherData"
@@ -106,7 +108,7 @@ const weatherData = ref(null);
 const locationFetchError = ref(false);
 
 const BASE_URL = "http://api.weatherapi.com/v1";
-const KEY = "API_KEY_HERE";
+const KEY = "655f56083b544971b0d213400232903";
 
 const localTime = computed(() => {
   return locationData.value?.localtime
