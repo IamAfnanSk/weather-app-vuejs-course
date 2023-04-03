@@ -1,22 +1,28 @@
 <template>
   <div class="weather-card-container">
-    <template v-for="(location, idx) in locations" :key="idx">
-      <Weather
-        @deleteLocation="() => deleteLocation(idx)"
-        :location="location"
-      />
-    </template>
+    <Weather
+      data-test="weather-card"
+      v-for="(location, idx) in locations"
+      :key="idx"
+      @deleteLocation="() => deleteLocation(idx)"
+      :location="location"
+    />
 
-    <EmptyWeatherButton @click="showNewLocationModal = true" />
+    <EmptyWeatherButton
+      data-test="weather-new-button"
+      @click="showNewLocationModal = true"
+    />
   </div>
 
   <NewLocationModal
     v-if="showNewLocationModal"
+    data-test="weather-new-modal"
     @addNewLocation="addNewLocation"
   />
 
   <div
     v-if="showNewLocationModal"
+    data-test="weather-new-modal-overlay"
     @click="showNewLocationModal = false"
     class="modal-wrapper"
   ></div>
