@@ -1,4 +1,4 @@
 terminals: ["npm install && npm run dev"]
-tabs: ["src/components/EmptyWeatherButton.vue", "src/components/Weather.vue"]
+tabs: ["src/App.vue", "src/components/EmptyWeatherButton.vue", "src/components/Weather.vue"]
 playground-view: "terminal-editor-browser"
 live-reload-browser: false
