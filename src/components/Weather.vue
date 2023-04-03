@@ -1,10 +1,9 @@
 <template>
   <div class="weather-card">
-    <div class="close-button" @click="$emit('deleteLocation')">delete</div>
-
+    <!-- Show below div if weatherData exist -->
     <div
-      class="weather-card-section"
       v-if="weatherData"
+      class="weather-card-section"
       data-test="weather-section-success"
     >
       <div class="weather-card-section-item">
@@ -12,11 +11,13 @@
       </div>
       <div class="weather-card-section-item weather-actual">
         <div>
+          <!-- Add actual weather in mustache syntax -->
           <p class="weather-p" data-test="weather-celsius">
             {{ weatherData.temp_c }} °C
           </p>
         </div>
-        <div>
+        <div data-test="weather-image">
+          <!-- add condition image src -->
           <img
             :src="weatherData.condition.icon"
             alt="weather image"
@@ -25,47 +26,59 @@
         </div>
       </div>
       <div class="weather-card-section-item">
+        <!-- Show condition text here: refer example json -->
         <p class="weather-p" data-test="weather-condition">
           {{ weatherData.condition.text }}
         </p>
       </div>
     </div>
+    <!-- else if locationFetchError exist show below div -->
     <div
-      class="weather-card-section"
       v-else-if="locationFetchError"
+      class="weather-card-section"
       data-test="weather-section-error"
     >
       Error fetching weather data
     </div>
+    <!-- else show below div -->
     <div
+      v-else
       class="weather-card-section"
       data-test="weather-section-loading"
-      v-else
     >
       Loading...
     </div>
 
+    <!-- show below div if locationData exist -->
     <div
-      class="weather-card-section weather-location"
       v-if="locationData"
+      class="weather-card-section weather-location"
       data-test="location-section-success"
     >
       <div class="weather-card-section-item">
-        <p class="weather-p">{{ localTime }}</p>
+        <p class="weather-p">{{ localTime || "" }}</p>
       </div>
       <div class="weather-card-section-item">
         <p class="weather-p" data-test="weather-location">
+          <!-- location name (comma) location region -->
           {{ locationData.name }}, {{ locationData.region }}
         </p>
       </div>
     </div>
-    <div class="weather-card-section" v-else-if="locationFetchError">
+    <!-- else if locationFetchError show this div -->
+    <div
+      v-else-if="locationFetchError"
+      class="weather-card-section"
+      data-test="location-section-error"
+    >
+      <!-- show locationFetchError in below p -->
       <p>{{ locationFetchError }}</p>
     </div>
+    <!-- else show below div -->
     <div
+      v-else
       class="weather-card-section"
       data-test="location-section-loading"
-      v-else
     >
       Loading...
     </div>
@@ -92,8 +105,8 @@ const weatherData = ref(null);
 
 const locationFetchError = ref(false);
 
-const BASE_URL = "http://api.weatherapi.com/v1";
-const KEY = "API_KEY_HERE";
+const BASE_URL = "https://api.weatherapi.com/v1";
+const KEY = "655f56083b544971b0d213400232903";
 
 const localTime = computed(() => {
   return locationData.value?.localtime
