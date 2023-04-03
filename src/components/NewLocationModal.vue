@@ -6,9 +6,11 @@
       type="text"
       v-model="location"
       placeholder="Add search query, like a city name"
-      autofocus
+      data-test="weather-new-add-input"
     />
-    <button @click="emitNewLocation">Add</button>
+    <button data-test="weather-new-add-button" @click="emitNewLocation">
+      Add
+    </button>
   </div>
 </template>
 
