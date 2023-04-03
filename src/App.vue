@@ -1,6 +1,6 @@
 <template>
   <div class="weather-card-container">
-    <Weather :location="'Mumbai'" />
+    <Weather data-test="weather-card" :location="'Mumbai'" />
   </div>
 </template>
 
