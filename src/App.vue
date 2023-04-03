@@ -13,16 +13,35 @@
       @click="showNewLocationModal = true"
     />
   </div>
+
+  <NewLocationModal
+    v-if="showNewLocationModal"
+    data-test="weather-new-modal"
+    @addNewLocation="addNewLocation"
+  />
+
+  <div
+    v-if="showNewLocationModal"
+    data-test="weather-new-modal-overlay"
+    @click="showNewLocationModal = false"
+    class="modal-wrapper"
+  ></div>
 </template>
 
 <script setup>
 import Weather from "./components/Weather.vue";
 import EmptyWeatherButton from "./components/EmptyWeatherButton.vue";
+import NewLocationModal from "./components/NewLocationModal.vue";
 import { ref } from "vue";
 
 const locations = ref(["Mumbai", "NY"]);
 
 const showNewLocationModal = ref(false);
+
+function addNewLocation(location) {
+  locations.value.push(location);
+  showNewLocationModal.value = false;
+}
 
 function deleteLocation(idx) {
   locations.value.splice(idx, 1);
