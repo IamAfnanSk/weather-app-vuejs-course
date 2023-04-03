@@ -1,6 +1,12 @@
 <template>
   <div class="weather-card">
-    <div class="close-button" @click="$emit('deleteLocation')">delete</div>
+    <div
+      class="close-button"
+      data-test="delete-weather"
+      @click="$emit('deleteLocation')"
+    >
+      delete
+    </div>
 
     <!-- Show below div if weatherData exist -->
     <div
