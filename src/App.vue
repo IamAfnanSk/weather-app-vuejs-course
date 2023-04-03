@@ -7,14 +7,22 @@
       @deleteLocation="() => deleteLocation(idx)"
       :location="location"
     />
+
+    <EmptyWeatherButton
+      data-test="weather-new-button"
+      @click="showNewLocationModal = true"
+    />
   </div>
 </template>
 
 <script setup>
 import Weather from "./components/Weather.vue";
+import EmptyWeatherButton from "./components/EmptyWeatherButton.vue";
 import { ref } from "vue";
 
 const locations = ref(["Mumbai", "NY"]);
+
+const showNewLocationModal = ref(false);
 
 function deleteLocation(idx) {
   locations.value.splice(idx, 1);
