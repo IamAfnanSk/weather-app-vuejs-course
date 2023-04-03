@@ -1,5 +1,7 @@
 <template>
   <div class="weather-card">
+    <div class="close-button" data-test="delete-weather">delete</div>
+
     <!-- Show below div if weatherData exist -->
     <div
       v-if="weatherData"
