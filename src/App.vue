@@ -26,9 +26,17 @@
 import Weather from "./components/Weather.vue";
 import EmptyWeatherButton from "./components/EmptyWeatherButton.vue";
 import NewLocationModal from "./components/NewLocationModal.vue";
-import { ref } from "vue";
+import { ref, toRefs } from "vue";
 
-const locations = ref([]);
+const props = defineProps({
+  locations: {
+    type: Array,
+    required: false,
+    default: [],
+  },
+});
+
+const { locations } = toRefs(props);
 
 const showNewLocationModal = ref(false);
 
