@@ -1,11 +1,24 @@
 <template>
   <div class="weather-card-container">
-    <Weather data-test="weather-card" :location="'Mumbai'" />
+    <Weather
+      data-test="weather-card"
+      v-for="(location, idx) in locations"
+      :key="idx"
+      @deleteLocation="() => deleteLocation(idx)"
+      :location="location"
+    />
   </div>
 </template>
 
 <script setup>
 import Weather from "./components/Weather.vue";
+import { ref } from "vue";
+
+const locations = ref(["Mumbai", "NY"]);
+
+function deleteLocation(idx) {
+  locations.value.splice(idx, 1);
+}
 </script>
 
 <style scoped>
