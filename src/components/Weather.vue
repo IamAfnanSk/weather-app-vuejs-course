@@ -114,7 +114,7 @@ const weatherData = ref(null);
 const locationFetchError = ref(false);
 
 const BASE_URL = "http://api.weatherapi.com/v1";
-const KEY = "655f56083b544971b0d213400232903";
+const KEY = "API_KEY";
 
 const localTime = computed(() => {
   return locationData.value?.localtime
